@@ -31,7 +31,7 @@ class Vector2d {
   void Mul(float value);
   void Div(float value);
 
-  static bool Compare(const Vector2d& v1, const Vector2d& v2) const {
+  static bool Compare(const Vector2d& v1, const Vector2d& v2) {
     return v1.x() == v2.x() && v1.y() == v2.y();
   }
 

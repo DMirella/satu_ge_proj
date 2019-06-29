@@ -16,6 +16,7 @@ set(CMAKE_CXX_FLAGS "-g -Wall")
 set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(./source)
+include_directories(./source/tools/)
 
 ########################################
 # Define include directories

@@ -7,10 +7,10 @@
 
 #include "gtest/gtest.h"
 
-#include "tools/vector2d.h"
+#include "vector2d.h"
 
 TEST(Vector2d, Add) {
-  Vector2d v1, v2;
+  tools::Vector2d v1, v2;
 
 }
 
