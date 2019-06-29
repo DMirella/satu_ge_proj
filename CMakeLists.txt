@@ -15,11 +15,13 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_FLAGS "-g -Wall")
 set(CMAKE_CXX_STANDARD 14)
 
+add_subdirectory(./source)
+
 ########################################
 # Define include directories
 ########################################
 # set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
-include_directories(${COMMON_INCLUDES})
+# include_directories(${COMMON_INCLUDES})
 
 ########################################
 # Source files
@@ -37,7 +39,7 @@ include_directories(${COMMON_INCLUDES})
 ########################################
 # Compile source files into a library
 ########################################
-add_library(project1_lib ${SRC_FILES})
+# add_library(project1_lib ${SRC_FILES})
 
 ########################################
 # Main is separate (e.g. library client)
@@ -67,17 +69,17 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ########################################
 # Test files
 ########################################
-# file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cc)
 
 ########################################
 # Unit Tests
 ########################################
-# add_executable(runUnitTests ${TEST_SRC_FILES})
+add_executable(runUnitTests ${TEST_SRC_FILES})
 
 ########################################
 # Standard linking to gtest stuff.
 ########################################
-# target_link_libraries(runUnitTests gtest gtest_main)
+target_link_libraries(runUnitTests gtest gtest_main)
 
 ########################################
 # Extra linking for the project.
@@ -86,4 +88,4 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 # This is so you can do 'make test' to see all your tests run, instead of
 # manually running the executable runUnitTests to see those specific tests.
-# add_test(UnitTests runUnitTests)
+add_test(UnitTests runUnitTests)
