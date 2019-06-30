@@ -22,18 +22,18 @@ class Vector2d {
       : x_(x), y_(y) { }
   ~Vector2d() { }
 
-  void Add(float value);
   void Add(const Vector2d& other);
-
-  void Sub(float value);
   void Sub(const Vector2d& other);
-
   void Mul(float value);
   void Div(float value);
+  float Length() const;
 
   static bool Compare(const Vector2d& v1, const Vector2d& v2) {
     return v1.x() == v2.x() && v1.y() == v2.y();
   }
+
+  void set_x(float x) { x_ = x; }
+  void set_y(float y) { y_ = y; }
 
   float x() const { return x_; }
   float y() const { return y_; }
@@ -41,6 +41,6 @@ class Vector2d {
   float x_, y_;
 };
 
-} /* namespace tools */
+}  // namespace tools
 
 #endif /* SATU_GE_PROJ_SOURCE_TOOLS_VECTOR2D_H_ */
