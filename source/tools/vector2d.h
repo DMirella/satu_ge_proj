@@ -10,35 +10,29 @@
 
 namespace tools {
 
-class Vector2d {
+class Vector2D {
  public:
-  Vector2d(Vector2d&& other) = delete;
-  Vector2d(const Vector2d& other) = delete;
-  Vector2d& operator=(Vector2d&& other) = delete;
-  Vector2d& operator=(const Vector2d& other) = delete;
+  Vector2D(Vector2D&& other) = delete;
+  Vector2D(const Vector2D& other) = delete;
+  Vector2D& operator=(Vector2D&& other) = delete;
+  Vector2D& operator=(const Vector2D& other) = delete;
 
-  Vector2d() : x_(0.0), y_(0.0) { }
-  Vector2d(float x, float y)
-      : x_(x), y_(y) { }
-  ~Vector2d() { }
+  Vector2D() : x(0.0), y(0.0) { }
+  Vector2D(float _x, float _y)
+      : x(_x), y(_y) { }
+  ~Vector2D() { }
 
-  void Add(const Vector2d& other);
-  void Sub(const Vector2d& other);
+  void Add(const Vector2D& other);
+  void Sub(const Vector2D& other);
   void Mul(float value);
   void Div(float value);
   float Length() const;
 
-  static bool Compare(const Vector2d& v1, const Vector2d& v2) {
-    return v1.x() == v2.x() && v1.y() == v2.y();
+  static bool Compare(const Vector2D& v1, const Vector2D& v2) {
+    return v1.x == v2.x && v1.y == v2.y;
   }
 
-  void set_x(float x) { x_ = x; }
-  void set_y(float y) { y_ = y; }
-
-  float x() const { return x_; }
-  float y() const { return y_; }
- private:
-  float x_, y_;
+  float x, y;
 };
 
 }  // namespace tools

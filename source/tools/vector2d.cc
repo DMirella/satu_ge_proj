@@ -12,30 +12,30 @@
 
 namespace tools {
 
-void Vector2d::Add(const Vector2d& other) {
-  x_ += other.x();
-  y_ += other.y();
+void Vector2D::Add(const Vector2D& other) {
+  x += other.x;
+  y += other.y;
 }
 
-void Vector2d::Sub(const Vector2d& other) {
-  x_ -= other.x();
-  y_ -= other.y();
+void Vector2D::Sub(const Vector2D& other) {
+  x -= other.x;
+  y -= other.y;
 }
 
-void Vector2d::Mul(float value) {
-  x_ *= value;
-  y_ *= value;
+void Vector2D::Mul(float value) {
+  x *= value;
+  y *= value;
 }
 
-void Vector2d::Div(float value) {
+void Vector2D::Div(float value) {
   assert(0.0 != value);
 
-  x_ /= value;
-  y_ /= value;
+  x /= value;
+  y /= value;
 }
 
-float Vector2d::Length() const {
-  return std::sqrt(x_ * x_ + y_ * y_);
+float Vector2D::Length() const {
+  return std::sqrt(x * x + y * y);
 }
 
 }  // namespace tools
