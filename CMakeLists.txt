@@ -15,14 +15,10 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_FLAGS "-g -Wall")
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory(./source)
-include_directories(./source/tools/)
-
 ########################################
 # Define include directories
 ########################################
-# set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
-# include_directories(${COMMON_INCLUDES})
+include_directories(${PROJECT_SOURCE_DIR}/source)
 
 ########################################
 # Source files
