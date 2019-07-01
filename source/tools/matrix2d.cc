@@ -5,7 +5,9 @@
  *      Author: Dima
  */
 
-#include "matrix_2d.h"
+#include "matrix2d.h"
+
+#include <assert.h>
 
 namespace tools {
 
@@ -24,20 +26,27 @@ Matrix2D& Matrix2D::operator=(const Matrix2D &other) {
   return *this;
 }
 
-float Matrix2D::det() const {
+float Matrix2D::Det() const {
   return x[0][0] * x[1][1] - x[0][1] * x[1][0];
 }
 
-Matrix2D& Matrix2D::invert() {
-  auto det_matrix = det();
-  transform();
-  det_matrix = 1.0 / det_matrix;
-  return Mul(det_matrix);
+Matrix2D& Matrix2D::Invert() {
+  auto det_matrix = Det();
+  assert(0.0 != det_matrix);
+  auto invert_det_matrix = 1.0 / det_matrix;
+
+  auto copy_matrix = *this;
+  x[0][0] = copy_matrix.x[1][1];
+  x[0][1] = -copy_matrix.x[1][0];
+  x[1][0] = -copy_matrix.x[0][1];
+  x[1][1] = copy_matrix.x[0][0];
+
+  return Transform().Mul(invert_det_matrix);
 }
 
-Matrix2D& Matrix2D::transform() const {
+Matrix2D& Matrix2D::Transform() {
   auto tmp = x[1][0];
-  x[1][0] = x[1][1];
+  x[1][0] = x[0][1];
   x[0][1] = tmp;
   return *this;
 }

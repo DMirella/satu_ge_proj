@@ -13,8 +13,7 @@ set(CMAKE_CXX_FLAGS "-g -Wall")
 #----------------------------------------------------------------------------
 # Define project sources and includes
 #----------------------------------------------------------------------------
-set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/source)
-include_directories(${COMMON_INCLUDES})
+include_directories(${PROJECT_SOURCE_DIR}/source)
 file(GLOB_RECURSE SRC_FILES ${PROJECT_SOURCE_DIR}/source/*.cc)
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cc)
 # list(REMOVE_ITEM SRC_FILES ${PROJECT_SOURCE_DIR}/src/main.cpp)
@@ -24,7 +23,8 @@ set(CMAKE_CXX_STANDARD 14)
 ################################
 # Normal Libraries & Executables
 ################################
-add_library(satu_ge_proj_lib ${SRC_FILES})
+set(PROJ_SRC_LIB_NAME satu_ge_proj_lib)
+add_library(${PROJ_SRC_LIB_NAME} ${SRC_FILES})
 # add_executable(project1 ${PROJECT_SOURCE_DIR}/src/main.cpp)
 # Key idea: SEPARATE OUT your main() function into its own file so it can be its
 # own executable. Separating out main() means you can add this library to be
@@ -58,7 +58,7 @@ if (BUILD_TESTS)
   target_link_libraries(runUnitTests gtest gtest_main)
 
   # Extra linking for the project.
-  target_link_libraries(runUnitTests satu_ge_proj_lib)
+  target_link_libraries(runUnitTests ${PROJ_SRC_LIB_NAME})
 
   # This is so you can do 'make test' to see all your tests run, instead of
   # manually running the executable runUnitTests to see those specific tests.
