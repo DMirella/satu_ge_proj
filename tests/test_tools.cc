@@ -5,10 +5,11 @@
  *      Author: Dima
  */
 
-#include "../source/tools/matrix2d.h"
 #include "gtest/gtest.h"
 
 #include "tools/homogeneous.h"
+#include "tools/matrix2d.h"
+#include "tools/matrix3d.h"
 #include "tools/vector2d.h"
 #include "tools/vector3d.h"
 #include "tools/vector4d.h"
@@ -233,8 +234,65 @@ TEST(Matrix2D, Mul_Value) {
   EXPECT_NEAR(m.x[1][1], 14.2, kAbsoluteError);
 }
 
-// Homogeneous
+// Matrix3D
+TEST(Matrix3D, Det) {
+  tools::Matrix3D m(  1.1, 2.3,   4.6,
+                      7.1,  -2, -5.66,
+                    -1.23,   3,     4);
 
+  EXPECT_NEAR(m.Det(), 47.23414, kAbsoluteError);
+}
+
+TEST(Matrix3D, Invert) {
+  tools::Matrix3D m(  1.1, 2.3,   4.6,
+                      7.1,  -2, -5.66,
+                    -1.23,   3,     4);
+  m.Invert();
+
+  EXPECT_NEAR(m.x[0][0], 0.19011, kAbsoluteError);
+  EXPECT_NEAR(m.x[0][1], 0.09738, kAbsoluteError);
+  EXPECT_NEAR(m.x[0][2], -0.08083, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][0], -0.45387, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][1], 0.21293, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][2], 0.82326, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][0], 0.39886, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][1], -0.12975, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][2], -0.39230, kAbsoluteError);
+}
+
+TEST(Matrix3D, Transform) {
+  tools::Matrix3D m(  1.1, 2.3,   4.6,
+                      7.1,  -2, -5.66,
+                    -1.23,   3,     4);
+  m.Transform();
+  EXPECT_NEAR(m.x[0][0], 1.1, kAbsoluteError);
+  EXPECT_NEAR(m.x[0][1], 7.1, kAbsoluteError);
+  EXPECT_NEAR(m.x[0][2], -1.23, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][0], 2.3, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][1], -2, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][2], 3, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][0], 4.6, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][1], -5.66, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][2], 4, kAbsoluteError);
+}
+
+TEST(Matrix3D, Mul_Value) {
+  tools::Matrix3D m(  1.1, 2.3,   4.6,
+                      7.1,  -2, -5.66,
+                    -1.23,   3,     4);
+  m.Mul(2);
+  EXPECT_NEAR(m.x[0][0], 2.2, kAbsoluteError);
+  EXPECT_NEAR(m.x[0][1], 4.6, kAbsoluteError);
+  EXPECT_NEAR(m.x[0][2], 9.2, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][0], 14.2, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][1], -4, kAbsoluteError);
+  EXPECT_NEAR(m.x[1][2], -11.32, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][0], -2.46, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][1], 6, kAbsoluteError);
+  EXPECT_NEAR(m.x[2][2], 8, kAbsoluteError);
+}
+
+// Homogeneous
 TEST(Homogeneous, Vector2DToHomogeneous) {
   tools::Vector2D v(1.1, 2.3);
   tools::Vector3D result = tools::Vector2DToHomogeneous(v);
