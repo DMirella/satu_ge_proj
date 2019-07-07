@@ -10,11 +10,12 @@
 
 #include "tools/vector2d.h"
 #include "tools/vector3d.h"
+#include "tools/vector4d.h"
 
 namespace tools {
 
-void HomogeneousVector2D(const Vector2D& vector2d);
-void HomogeneousVector3D(const Vector2D& vector2d);
+Vector3D Vector2DToHomogeneous(const Vector2D& vector2d);
+Vector4D Vector3DToHomogeneous(const Vector3D& vector2d);
 
 }  // namespace tools
 

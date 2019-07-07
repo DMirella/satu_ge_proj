@@ -12,14 +12,13 @@ namespace tools {
 
 class Vector4D {
  public:
-  Vector4D(Vector4D&& other) = delete;
-  Vector4D(const Vector4D& other) = delete;
-  Vector4D& operator=(Vector4D&& other) = delete;
-  Vector4D& operator=(const Vector4D& other) = delete;
+  Vector4D();
+  Vector4D(float _x, float _y, float _z, float _u);
+  Vector4D(const Vector4D& other);
+  Vector4D& operator=(const Vector4D& other);
+  Vector4D(Vector4D&& other);
+  Vector4D& operator=(Vector4D&& other);
 
-  Vector4D() : x(0.0), y(0.0), z(0.0), u(0.0) { }
-  Vector4D(float _x, float _y, float _z, float _u)
-      : x(_x), y(_y), z(_z), u(_u) { }
   ~Vector4D() { }
 
   void Add(const Vector4D& other);

@@ -14,14 +14,13 @@ namespace tools {
 
 class Vector2D {
  public:
-  Vector2D(Vector2D&& other) = delete;
-  Vector2D(const Vector2D& other) = delete;
-  Vector2D& operator=(Vector2D&& other) = delete;
-  Vector2D& operator=(const Vector2D& other) = delete;
+  Vector2D();
+  Vector2D(float _x, float _y);
+  Vector2D(const Vector2D& other);
+  Vector2D& operator=(const Vector2D& other);
+  Vector2D(Vector2D&& other);
+  Vector2D& operator=(Vector2D&& other);
 
-  Vector2D() : x(0.0), y(0.0) { }
-  Vector2D(float _x, float _y)
-      : x(_x), y(_y) { }
   ~Vector2D() { }
 
   void Add(const Vector2D& other);

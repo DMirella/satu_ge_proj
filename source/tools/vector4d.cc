@@ -12,6 +12,45 @@
 
 namespace tools {
 
+Vector4D::Vector4D() : x(0.0), y(0.0), z(0.0), u(0.0) {
+
+}
+
+Vector4D::Vector4D(float _x, float _y, float _z, float _u)
+  : x(_x), y(_y), z(_z), u(_u) {
+
+}
+
+Vector4D::Vector4D(const Vector4D& other) {
+  x = other.x;
+  y = other.y;
+  z = other.z;
+  u = other.u;
+}
+
+Vector4D& Vector4D::operator=(const Vector4D& other) {
+  x = other.x;
+  y = other.y;
+  z = other.z;
+  u = other.u;
+  return *this;
+}
+
+Vector4D::Vector4D(Vector4D&& other) {
+  x = other.x;
+  y = other.y;
+  z = other.z;
+  u = other.u;
+}
+
+Vector4D& Vector4D::operator=(Vector4D&& other) {
+  x = other.x;
+  y = other.y;
+  z = other.z;
+  u = other.u;
+  return *this;
+}
+
 void Vector4D::Add(const Vector4D& other) {
   x += other.x;
   y += other.y;

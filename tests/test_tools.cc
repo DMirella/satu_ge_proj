@@ -8,6 +8,7 @@
 #include "../source/tools/matrix2d.h"
 #include "gtest/gtest.h"
 
+#include "tools/homogeneous.h"
 #include "tools/vector2d.h"
 #include "tools/vector3d.h"
 #include "tools/vector4d.h"
@@ -231,3 +232,23 @@ TEST(Matrix2D, Mul_Value) {
   EXPECT_NEAR(m.x[1][0],  9.2, kAbsoluteError);
   EXPECT_NEAR(m.x[1][1], 14.2, kAbsoluteError);
 }
+
+// Homogeneous
+
+TEST(Homogeneous, Vector2DToHomogeneous) {
+  tools::Vector2D v(1.1, 2.3);
+  tools::Vector3D result = tools::Vector2DToHomogeneous(v);
+  EXPECT_NEAR(result.x,  v.x, kAbsoluteError);
+  EXPECT_NEAR(result.y,  v.y, kAbsoluteError);
+  EXPECT_NEAR(result.z,  1, kAbsoluteError);
+}
+
+TEST(Homogeneous, Vector3DToHomogeneous) {
+  tools::Vector3D v(1.1, 2.3, 5);
+  tools::Vector4D result = tools::Vector3DToHomogeneous(v);
+  EXPECT_NEAR(result.x,  v.x, kAbsoluteError);
+  EXPECT_NEAR(result.y,  v.y, kAbsoluteError);
+  EXPECT_NEAR(result.z,  v.z, kAbsoluteError);
+  EXPECT_NEAR(result.u,  1, kAbsoluteError);
+}
+
