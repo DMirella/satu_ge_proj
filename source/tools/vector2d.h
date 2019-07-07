@@ -8,6 +8,8 @@
 #ifndef SATU_GE_PROJ_SOURCE_TOOLS_VECTOR2D_H_
 #define SATU_GE_PROJ_SOURCE_TOOLS_VECTOR2D_H_
 
+#include "tools/vector3d.h"
+
 namespace tools {
 
 class Vector2D {
