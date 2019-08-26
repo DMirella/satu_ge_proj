@@ -10,6 +10,7 @@
 #include "tools/homogeneous.h"
 #include "tools/matrix2d.h"
 #include "tools/matrix3d.h"
+#include "tools/quaternion.h"
 #include "tools/vector2d.h"
 #include "tools/vector3d.h"
 #include "tools/vector4d.h"
@@ -296,17 +297,56 @@ TEST(Matrix3D, Mul_Value) {
 TEST(Homogeneous, Vector2DToHomogeneous) {
   tools::Vector2D v(1.1, 2.3);
   tools::Vector3D result = tools::Vector2DToHomogeneous(v);
-  EXPECT_NEAR(result.x,  v.x, kAbsoluteError);
-  EXPECT_NEAR(result.y,  v.y, kAbsoluteError);
-  EXPECT_NEAR(result.z,  1, kAbsoluteError);
+  EXPECT_NEAR(result.x, v.x, kAbsoluteError);
+  EXPECT_NEAR(result.y, v.y, kAbsoluteError);
+  EXPECT_NEAR(result.z, 1, kAbsoluteError);
 }
 
 TEST(Homogeneous, Vector3DToHomogeneous) {
   tools::Vector3D v(1.1, 2.3, 5);
   tools::Vector4D result = tools::Vector3DToHomogeneous(v);
-  EXPECT_NEAR(result.x,  v.x, kAbsoluteError);
-  EXPECT_NEAR(result.y,  v.y, kAbsoluteError);
-  EXPECT_NEAR(result.z,  v.z, kAbsoluteError);
-  EXPECT_NEAR(result.u,  1, kAbsoluteError);
+  EXPECT_NEAR(result.x, v.x, kAbsoluteError);
+  EXPECT_NEAR(result.y, v.y, kAbsoluteError);
+  EXPECT_NEAR(result.z, v.z, kAbsoluteError);
+  EXPECT_NEAR(result.u, 1, kAbsoluteError);
+}
+
+// Quaternion
+TEST(Quaternion, Normalize) {
+  tools::Quaternion q(1.1, tools::Vector3D(1.2, 2.3, 3));
+  q.Normalize();
+  EXPECT_NEAR(q.scalar, 0.06493, kAbsoluteError);
+  EXPECT_NEAR(q.vector.x, 0.0708, kAbsoluteError);
+  EXPECT_NEAR(q.vector.y, 0.1357, kAbsoluteError);
+  EXPECT_NEAR(q.vector.z, 0.17709, kAbsoluteError);
+}
+
+TEST(Quaternion, Add) {
+  tools::Quaternion q1(1.1, tools::Vector3D(1.2, 2.3, 3));
+  tools::Quaternion q2(4, tools::Vector3D(2, 4, 6));
+  q1.Add(q2);
+  EXPECT_NEAR(q1.scalar, 5.1, kAbsoluteError);
+  EXPECT_NEAR(q1.vector.x, 3.2, kAbsoluteError);
+  EXPECT_NEAR(q1.vector.y, 6.3, kAbsoluteError);
+  EXPECT_NEAR(q1.vector.z, 9, kAbsoluteError);
+}
+
+TEST(Quaternion, Sub) {
+  tools::Quaternion q1(1.1, tools::Vector3D(1.2, 2.3, 3));
+  tools::Quaternion q2(4, tools::Vector3D(2, 4, 6));
+  q1.Sub(q2);
+  EXPECT_NEAR(q1.scalar, -2.9, kAbsoluteError);
+  EXPECT_NEAR(q1.vector.x, -0.8, kAbsoluteError);
+  EXPECT_NEAR(q1.vector.y, -1.7, kAbsoluteError);
+  EXPECT_NEAR(q1.vector.z, -3, kAbsoluteError);
+}
+
+TEST(Quaternion, Mul) {
+  tools::Quaternion q(1.1, tools::Vector3D(1.2, 2.3, 3));
+  q.Mul(2);
+  EXPECT_NEAR(q.scalar, 2.2, kAbsoluteError);
+  EXPECT_NEAR(q.vector.x, 2.4, kAbsoluteError);
+  EXPECT_NEAR(q.vector.y, 4.6, kAbsoluteError);
+  EXPECT_NEAR(q.vector.z, 6, kAbsoluteError);
 }
 
