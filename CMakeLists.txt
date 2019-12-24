@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
-# Make PROJECT_SOURCE_DIR, PROJECT_BINARY_DIR, and PROJECT_NAME available.
-set(PROJECT_NAME satu_ge_proj)
-project(${PROJECT_NAME})
+project(satu_ge_proj)
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
+set(CMAKE_CXX_STANDARD 14)
 
 # If you want your own include/ directory, set this, and then you can do
 # include_directories(${COMMON_INCLUDES}) in other CMakeLists.txt files.
@@ -18,7 +17,6 @@ file(GLOB_RECURSE SRC_FILES ${PROJECT_SOURCE_DIR}/source/*.cc)
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/tests/*.cc)
 # list(REMOVE_ITEM SRC_FILES ${PROJECT_SOURCE_DIR}/src/main.cpp)
 
-set(CMAKE_CXX_STANDARD 14)
 
 ################################
 # Normal Libraries & Executables
@@ -40,28 +38,6 @@ add_library(${PROJ_SRC_LIB_NAME} ${SRC_FILES})
 option(BUILD_TESTS "Build all tests." ON) # Makes boolean 'test' available.
 
 if (BUILD_TESTS)
-  # This adds another subdirectory, which has 'project(gtest)'.
   add_subdirectory(./googletest)
-
-  enable_testing()
-
-  # Include the gtest library. gtest_SOURCE_DIR is available due to
-  # 'project(gtest)' above.
-  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-
-  ##############
-  # Unit Tests
-  ##############
-  add_executable(runUnitTests ${TEST_SRC_FILES})
-
-  # Standard linking to gtest stuff.
-  target_link_libraries(runUnitTests gtest gtest_main)
-
-  # Extra linking for the project.
-  target_link_libraries(runUnitTests ${PROJ_SRC_LIB_NAME})
-
-  # This is so you can do 'make test' to see all your tests run, instead of
-  # manually running the executable runUnitTests to see those specific tests.
-  add_test(UnitTests runUnitTests)
-
+  add_subdirectory(./tests)
 endif()
